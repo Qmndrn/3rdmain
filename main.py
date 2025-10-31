@@ -15,13 +15,12 @@ def load_key():
     with open("key.key", "rb") as file:
         return file.read()
 
-
 def add(f):
     login = input("Введите логин: ").strip()
     password = input("Введите пароль: ").strip()
     token = f.encrypt(password.encode()).decode()
-    with open("passwords.txt", "w") as file:
-        file.write(f"Логин:{login}/Пароль:{token}")
+    with open("passwords.txt", "a") as file:
+        file.write(f"Логин:{login}/Пароль:{token}\n")
     print("Сохранено")
 
 
@@ -30,14 +29,13 @@ def view(f):
         for splits in file:
          log, passw = splits.split("/", 1)
          password = f.decrypt(passw.encode()).decode()
-        print(log,password)
+        print(f"Последние записанные данные: {log} Пароль:{password}")
 
 def main():
     write_key()
     key = load_key()
     f = Fernet(key)
     add(f)
-    view(f)
     while True:
         users_choice = input("1. Посмотреть  2. Добавить  3. Выйти: ").strip()
         if users_choice == "1":

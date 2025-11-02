@@ -31,7 +31,7 @@ def view(f):
         for splits in file:
          log, passw = splits.split("/", 1)
          password = f.decrypt(passw.encode()).decode()
-        print(f"Последние записанные данные: {log} Пароль:{password}")
+         print(f"{log} Пароль:{password}")
 
 
 def main():
@@ -47,6 +47,8 @@ def main():
             add(f)
         elif users_choice == "3":
             break
+        else:
+            print("Неизвестная команда")
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ from main import load_key
 key = load_key()
 f = Fernet(key)
 
+
 def authorization(f):
     login = input("Введите логин: ").strip()
     password = input("Введите пароль: ").strip()

@@ -1,6 +1,7 @@
 from cryptography.fernet import Fernet
 from main import load_key
 
+
 key = load_key()
 f = Fernet(key)
 
@@ -22,6 +23,7 @@ def authorization(f):
                     return False
         print("В базе нет такого пользователя")
         return False
+
 
 while True:
     if authorization(f):

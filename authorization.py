@@ -1,11 +1,6 @@
 from cryptography.fernet import Fernet
 from main import load_key
 
-
-key = load_key()
-f = Fernet(key)
-
-
 def authorization(f):
     login = input("Введите логин: ").strip()
     password = input("Введите пароль: ").strip()
@@ -13,7 +8,7 @@ def authorization(f):
     with open("passwords.txt", "r") as file:
         for line in file:
             log, token = line.split("/", 1)
-            trash, stored_log= log.split(":", 1)
+            trash, stored_log = log.split(":", 1)
             if stored_log == login:
                 decrypted_pass = f.decrypt(token.encode()).decode()
                 if password == decrypted_pass:
@@ -25,7 +20,12 @@ def authorization(f):
         print("В базе нет такого пользователя")
         return False
 
+def main():
+    key = load_key()
+    f = Fernet(key)
+    while True:
+        if authorization(f):
+            break
 
-while True:
-    if authorization(f):
-        break
+if __name__ == "__main__":
+    main()

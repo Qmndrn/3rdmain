@@ -6,7 +6,6 @@ def authorization(fernet: Fernet):
     login = input("Введите логин: ").strip()
     password = input("Введите пароль: ").strip()
 
-
     with open("passwords.txt", "r") as file:
         for line in file:
             stored_log, token = line.split("/", 1)[0].split(":", 1)[1], line.split("/", 1)[1]

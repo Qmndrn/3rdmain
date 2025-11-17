@@ -8,12 +8,15 @@ def authorization(fernet: Fernet):
 
     with open("passwords.txt", "r") as file:
         for line in file:
-            stored_log, token = line.split("/", 1)[0].split(":", 1)[1], line.split("/", 1)[1]
+            stored_log, token = (
+                line.split("/", 1)[0].split(":", 1)[1],
+                line.split("/", 1)[1],
+            )
             if stored_log == login:
                 decrypted_pass = fernet.decrypt(token.strip().encode()).decode()
                 if password == decrypted_pass:
-                 print("Вы успешно авторизованы")
-                 return True
+                    print("Вы успешно авторизованы")
+                    return True
             print("Неверный пароль")
             return False
     print("В базе нет такого пользователя")
